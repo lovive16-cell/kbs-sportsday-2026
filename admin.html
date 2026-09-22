@@ -1,0 +1,307 @@
+<!doctype html>
+<html lang="ko">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="robots" content="noindex, nofollow">
+<title>초대장 관리자 · KBS 가을 체육대회</title>
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'%3E%3Ctext y='.9em' font-size='90'%3E%F0%9F%94%92%3C/text%3E%3C/svg%3E">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,500;9..144,600;9..144,700&family=Manrope:wght@400;500;600;700;800&family=JetBrains+Mono:wght@400;500;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="style.css">
+<style>
+  .lock-screen{
+    min-height:100vh; display:flex; align-items:center; justify-content:center; padding:24px;
+  }
+  .lock-card{
+    background:var(--surface); border-radius:20px; box-shadow:var(--shadow);
+    padding:40px 34px; width:100%; max-width:340px; text-align:center;
+  }
+  .lock-card h1{font-size:1.3rem; margin-bottom:8px;}
+  .lock-card p{color:var(--ink-muted); font-size:0.88rem; margin-bottom:22px;}
+  .lock-card input{
+    width:100%; padding:12px 14px; border-radius:10px; border:1px solid var(--line);
+    background:var(--bg); color:var(--ink); font-size:0.95rem; font-family:inherit;
+  }
+  .lock-card button{
+    width:100%; margin-top:12px; padding:12px 14px; border-radius:10px; border:none;
+    background:var(--ink); color:var(--bg); font-weight:700; font-size:0.92rem; cursor:pointer;
+  }
+  .lock-error{color:var(--jerry); font-size:0.82rem; margin-top:10px; min-height:1em;}
+
+  .admin-wrap{max-width:760px; margin:0 auto; padding:56px 24px 80px;}
+  .admin-head{margin-bottom:32px;}
+  .admin-head .tag{
+    display:inline-block; font-family:'JetBrains Mono',monospace; font-size:0.74rem; font-weight:600;
+    letter-spacing:0.06em; text-transform:uppercase; color:var(--jerry); margin-bottom:8px;
+  }
+  .admin-grid{display:grid; grid-template-columns:300px 1fr; gap:28px; align-items:start;}
+  @media (max-width:680px){ .admin-grid{grid-template-columns:1fr;} }
+
+  .admin-form{display:flex; flex-direction:column; gap:10px; margin-bottom:22px;}
+  .admin-form input, .admin-form select{
+    padding:11px 13px; border-radius:10px; border:1px solid var(--line);
+    background:var(--surface); color:var(--ink); font-family:inherit; font-size:0.92rem;
+  }
+  .admin-form button{
+    padding:11px 13px; border-radius:10px; border:none; background:var(--jerry); color:#FFF7EE;
+    font-weight:700; font-size:0.9rem; cursor:pointer;
+  }
+
+  .invite-list{display:flex; flex-direction:column; gap:8px;}
+  .invite-row{
+    display:flex; align-items:center; justify-content:space-between; gap:10px; flex-wrap:wrap;
+    background:var(--surface); border:1px solid var(--line); border-radius:12px; padding:10px 14px;
+  }
+  .invite-row .who{font-weight:600; font-size:0.92rem;}
+  .pill{font-size:0.68rem; font-weight:700; padding:2px 9px; border-radius:999px; margin-left:8px;}
+  .pill.tom{background:var(--tom-tint); color:var(--tom);}
+  .pill.jerry{background:var(--jerry-tint); color:var(--jerry);}
+  .invite-row .actions{display:flex; gap:6px;}
+  .mini-btn{
+    font-size:0.78rem; font-weight:600; padding:7px 12px; border-radius:999px;
+    border:1px solid var(--line); background:var(--bg); color:var(--ink); cursor:pointer;
+  }
+  .mini-btn.primary{background:var(--jerry); border-color:var(--jerry); color:#FFF7EE;}
+
+  .preview-box{
+    background:var(--surface); border:1px dashed var(--line); border-radius:16px; padding:14px;
+    display:flex; align-items:center; justify-content:center; min-height:220px;
+  }
+  #inviteCanvas{width:100%; max-width:420px; height:auto; border-radius:12px; box-shadow:var(--shadow);}
+  .hint{color:var(--ink-muted); font-size:0.85rem; margin-top:10px;}
+  .empty-note{color:var(--ink-muted); font-size:0.9rem;}
+</style>
+</head>
+<body>
+
+<div class="lock-screen" id="lockScreen">
+  <div class="lock-card">
+    <h1>🔒 관리자 전용</h1>
+    <p>초대장을 만들려면 비밀번호를 입력하세요.</p>
+    <input type="password" id="pwInput" placeholder="비밀번호" autocomplete="off">
+    <button id="pwSubmit">입장하기</button>
+    <p class="lock-error" id="pwError"></p>
+  </div>
+</div>
+
+<div class="admin-wrap" id="adminPanel" hidden>
+  <div class="admin-head">
+    <span class="tag">관리자 전용</span>
+    <h2>초대장 만들기</h2>
+    <p class="hint">이름과 소속 팀을 입력해 초대장 카드를 만들고 다운로드하세요.</p>
+  </div>
+
+  <div class="admin-grid">
+    <div>
+      <form class="admin-form" id="inviteForm">
+        <input type="text" id="inviteName" placeholder="초대할 사람 이름" maxlength="20" required>
+        <select id="inviteTeam">
+          <option value="tom">톰팀</option>
+          <option value="jerry">제리팀</option>
+        </select>
+        <button type="submit">명단에 추가</button>
+      </form>
+      <div class="invite-list" id="inviteList"></div>
+    </div>
+    <div>
+      <div class="preview-box"><canvas id="inviteCanvas" width="1200" height="750"></canvas></div>
+      <p class="hint" id="previewHint">명단에서 "카드 보기"를 누르면 미리보기가 표시됩니다.</p>
+    </div>
+  </div>
+</div>
+
+<script>
+(function(){
+  // SHA-256("tomjerry1024") — change the password by hashing a new phrase
+  // in a browser console: crypto.subtle.digest('SHA-256', new TextEncoder().encode('새 비밀번호'))
+  // then converting the ArrayBuffer to a hex string, and pasting it below.
+  const PASS_HASH = '08dfc5e7c03b5a080a993c76a15d44be6e08870d101c67347c4574ae147a87e9';
+
+  async function sha256Hex(text){
+    const buf = await crypto.subtle.digest('SHA-256', new TextEncoder().encode(text));
+    return Array.from(new Uint8Array(buf)).map(b => b.toString(16).padStart(2, '0')).join('');
+  }
+
+  const lockScreen = document.getElementById('lockScreen');
+  const adminPanel = document.getElementById('adminPanel');
+  const pwInput = document.getElementById('pwInput');
+  const pwError = document.getElementById('pwError');
+
+  async function tryUnlock(){
+    const hash = await sha256Hex(pwInput.value);
+    if (hash === PASS_HASH) {
+      sessionStorage.setItem('kbs-admin-ok', '1');
+      lockScreen.hidden = true;
+      adminPanel.hidden = false;
+      initAdmin();
+    } else {
+      pwError.textContent = '비밀번호가 올바르지 않습니다.';
+      pwInput.value = '';
+      pwInput.focus();
+    }
+  }
+  document.getElementById('pwSubmit').addEventListener('click', tryUnlock);
+  pwInput.addEventListener('keydown', (e) => { if (e.key === 'Enter') tryUnlock(); });
+
+  if (sessionStorage.getItem('kbs-admin-ok') === '1') {
+    lockScreen.hidden = true;
+    adminPanel.hidden = false;
+    initAdmin();
+  }
+
+  function escapeHtml(s){
+    return String(s ?? '').replace(/[&<>"']/g, c => ({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
+  }
+
+  let initialized = false;
+  function initAdmin(){
+    if (initialized) return;
+    initialized = true;
+
+    const STORE_KEY = 'kbs-invitees';
+    let invitees = [];
+    try { invitees = JSON.parse(localStorage.getItem(STORE_KEY) || '[]'); } catch(e) {}
+
+    const canvas = document.getElementById('inviteCanvas');
+    const ctx = canvas.getContext('2d');
+    const previewHint = document.getElementById('previewHint');
+    const inviteListEl = document.getElementById('inviteList');
+    const inviteForm = document.getElementById('inviteForm');
+
+    const TEAM_META = {
+      tom:   { label: '톰팀',   base: '#1F3D63', deep: '#122236' },
+      jerry: { label: '제리팀', base: '#BE5B23', deep: '#6E3210' },
+    };
+
+    function save(){ localStorage.setItem(STORE_KEY, JSON.stringify(invitees)); }
+
+    function drawInvite(name, team){
+      const meta = TEAM_META[team] || TEAM_META.tom;
+      const w = canvas.width, h = canvas.height;
+      const grad = ctx.createLinearGradient(0, 0, w, h);
+      grad.addColorStop(0, meta.base);
+      grad.addColorStop(1, meta.deep);
+      ctx.fillStyle = grad;
+      ctx.fillRect(0, 0, w, h);
+
+      ctx.strokeStyle = 'rgba(255,255,255,0.45)';
+      ctx.lineWidth = 2;
+      ctx.strokeRect(30, 30, w - 60, h - 60);
+
+      ctx.fillStyle = '#FFFFFF';
+      ctx.beginPath();
+      ctx.roundRect(60, 60, 140, 42, 21);
+      ctx.fill();
+      ctx.fillStyle = meta.base;
+      ctx.font = '700 20px "Fraunces", serif';
+      ctx.textAlign = 'center';
+      ctx.textBaseline = 'middle';
+      ctx.fillText(meta.label, 130, 82);
+
+      ctx.textAlign = 'left';
+      ctx.fillStyle = 'rgba(255,255,255,0.85)';
+      ctx.font = '600 22px "JetBrains Mono", monospace';
+      ctx.fillText('2026 KBS 가을 체육대회 · 초대장', 60, 150);
+
+      ctx.font = '600 62px "Fraunces", serif';
+      ctx.fillStyle = '#FFFFFF';
+      ctx.fillText((name || '게스트') + ' 님', 60, 250);
+
+      ctx.font = '500 28px "Manrope", sans-serif';
+      ctx.fillStyle = 'rgba(255,255,255,0.92)';
+      ctx.fillText('톰과 제리의 불꽃 튀는 대결에 초대합니다', 60, 310);
+
+      const lines = [
+        '일시   10월 24일(토) 오후 1:00 – 오후 6:00',
+        '장소   경기상고 백악관 (체육관)',
+        '소속   ' + meta.label,
+      ];
+      ctx.font = '500 24px "JetBrains Mono", monospace';
+      lines.forEach((line, i) => ctx.fillText(line, 60, 410 + i * 42));
+
+      ctx.font = '600 22px "Manrope", sans-serif';
+      ctx.fillStyle = 'rgba(255,255,255,0.8)';
+      ctx.fillText('10월 24일, 너도 함께할 거지?', 60, h - 66);
+    }
+
+    function loadFonts(){
+      return Promise.all([
+        document.fonts.load('600 62px "Fraunces"'),
+        document.fonts.load('700 20px "Fraunces"'),
+        document.fonts.load('500 28px "Manrope"'),
+        document.fonts.load('500 24px "JetBrains Mono"'),
+      ]).catch(()=>{});
+    }
+
+    function render(){
+      if (!invitees.length){
+        inviteListEl.innerHTML = '<p class="empty-note">아직 추가된 인원이 없습니다.</p>';
+        return;
+      }
+      inviteListEl.innerHTML = invitees.map((inv, i) => `
+        <div class="invite-row">
+          <div class="who">${escapeHtml(inv.name)}<span class="pill ${inv.team}">${TEAM_META[inv.team].label}</span></div>
+          <div class="actions">
+            <button class="mini-btn" data-preview="${i}">카드 보기</button>
+            <button class="mini-btn primary" data-download="${i}">다운로드</button>
+            <button class="mini-btn" data-remove="${i}">삭제</button>
+          </div>
+        </div>`).join('');
+
+      inviteListEl.querySelectorAll('[data-preview]').forEach(btn => {
+        btn.addEventListener('click', async () => {
+          const inv = invitees[Number(btn.dataset.preview)];
+          if (!inv) return;
+          await loadFonts();
+          drawInvite(inv.name, inv.team);
+          previewHint.textContent = inv.name + ' 님의 초대장 미리보기입니다.';
+        });
+      });
+      inviteListEl.querySelectorAll('[data-download]').forEach(btn => {
+        btn.addEventListener('click', async () => {
+          const inv = invitees[Number(btn.dataset.download)];
+          if (!inv) return;
+          await loadFonts();
+          drawInvite(inv.name, inv.team);
+          canvas.toBlob((blob) => {
+            if (!blob) return;
+            const url = URL.createObjectURL(blob);
+            const a = document.createElement('a');
+            a.href = url;
+            a.download = `초대장_${inv.name}.png`;
+            document.body.appendChild(a);
+            a.click();
+            a.remove();
+            URL.revokeObjectURL(url);
+            previewHint.textContent = inv.name + ' 님의 초대장을 다운로드했습니다.';
+          }, 'image/png');
+        });
+      });
+      inviteListEl.querySelectorAll('[data-remove]').forEach(btn => {
+        btn.addEventListener('click', () => {
+          invitees.splice(Number(btn.dataset.remove), 1);
+          save();
+          render();
+        });
+      });
+    }
+
+    inviteForm.addEventListener('submit', (e) => {
+      e.preventDefault();
+      const name = document.getElementById('inviteName').value.trim();
+      const team = document.getElementById('inviteTeam').value;
+      if (!name) return;
+      invitees.unshift({ name, team });
+      save();
+      render();
+      inviteForm.reset();
+    });
+
+    render();
+  }
+})();
+</script>
+</body>
+</html>
