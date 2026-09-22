@@ -45,13 +45,13 @@ body{
   margin:0;
   background:var(--bg);
   color:var(--ink);
-  font-family:'Manrope', -apple-system, 'Malgun Gothic', sans-serif;
-  line-height:1.65;
+  font-family:'Gowun Dodum', -apple-system, 'Malgun Gothic', sans-serif;
+  line-height:1.7;
   -webkit-font-smoothing:antialiased;
 }
 h1,h2,h3{
-  font-family:'Fraunces', Georgia, serif;
-  font-weight:600;
+  font-family:'Jua', 'Gowun Dodum', sans-serif;
+  font-weight:400;
   text-wrap:balance;
   margin:0;
 }
@@ -68,7 +68,7 @@ a{color:inherit;}
   border-bottom:1px solid var(--line);
 }
 .topbar-inner{padding:16px 24px; display:flex; align-items:center; justify-content:space-between; gap:16px;}
-.brand{font-family:'Fraunces',serif; font-weight:600; font-size:1.02rem; text-decoration:none; letter-spacing:-0.01em;}
+.brand{font-family:'Jua','Gowun Dodum',sans-serif; font-size:1.1rem; text-decoration:none;}
 .topnav{display:flex; gap:22px; font-size:0.86rem; font-weight:600;}
 .topnav a{text-decoration:none; color:var(--ink-muted); padding:4px 0; border-bottom:1px solid transparent;}
 .topnav a:hover, .topnav a:focus-visible{color:var(--ink); border-color:var(--jerry);}
@@ -109,8 +109,8 @@ a{color:inherit;}
 .section + .section{border-top:1px solid var(--line);}
 .section-head{margin-bottom:36px;}
 .kicker{
-  font-family:'JetBrains Mono',monospace; font-size:0.76rem; font-weight:500;
-  letter-spacing:0.08em; text-transform:uppercase; color:var(--jerry); margin:0 0 10px;
+  font-family:'Gowun Dodum',sans-serif; font-size:0.85rem; font-weight:400;
+  letter-spacing:0.02em; color:var(--jerry); margin:0 0 10px;
 }
 .section-head h2{font-size:clamp(1.4rem,3vw,1.85rem); line-height:1.3;}
 .section-note{color:var(--ink-muted); font-size:0.95rem; margin:32px 0 18px;}
@@ -125,12 +125,25 @@ a{color:inherit;}
 .info-row dt{font-size:0.82rem; font-weight:700; color:var(--ink-muted); text-transform:uppercase; letter-spacing:0.04em;}
 .info-row dd{margin:0; font-size:1.02rem; font-weight:500;}
 
-/* jersey photo */
-.jersey-figure{margin:0; border-radius:16px; overflow:hidden; background:var(--surface); box-shadow:var(--shadow);}
-.jersey-figure img{display:block; width:100%; height:auto;}
-.jersey-figure figcaption{
-  padding:14px 20px; font-size:0.86rem; color:var(--ink-muted); border-top:1px solid var(--line);
+/* uniform preview cards */
+.uniform-grid{display:grid; grid-template-columns:1fr 1fr; gap:16px;}
+@media (max-width:560px){ .uniform-grid{grid-template-columns:1fr;} }
+.uniform-card{
+  position:relative; margin:0; border-radius:16px; overflow:hidden;
+  background:var(--surface); box-shadow:var(--shadow);
 }
+.uniform-card img{display:block; width:100%; height:auto;}
+.preview-tag{
+  position:absolute; top:12px; left:12px; font-family:'JetBrains Mono',monospace;
+  font-size:0.64rem; font-weight:700; letter-spacing:0.08em; padding:4px 10px; border-radius:999px;
+  background:rgba(255,255,255,0.92); color:var(--ink);
+}
+.uniform-card figcaption{
+  padding:12px 16px; font-family:'Jua','Gowun Dodum',sans-serif; font-size:1.1rem;
+  text-align:center; border-top:1px solid var(--line);
+}
+.uniform-card.tom figcaption{color:var(--tom); background:var(--tom-tint);}
+.uniform-card.jerry figcaption{color:var(--jerry); background:var(--jerry-tint);}
 
 /* highlight video */
 .highlight-video{
@@ -160,7 +173,7 @@ a{color:inherit;}
   padding-top:14px; border-top:1px solid var(--line);
 }
 .rivalry-divider{
-  align-self:center; font-family:'Fraunces',serif; font-weight:600; font-size:1rem;
+  align-self:center; font-family:'Jua',sans-serif; font-size:1.1rem;
   color:var(--ink-muted); padding-top:2px;
 }
 
@@ -198,5 +211,5 @@ a{color:inherit;}
 
 /* footer */
 .site-footer{padding:56px 24px 72px; text-align:center;}
-.foot-line{font-family:'Fraunces',serif; font-weight:600; font-size:1.3rem;}
+.foot-line{font-family:'Jua','Gowun Dodum',sans-serif; font-size:1.4rem;}
 .foot-copy{margin-top:10px; font-size:0.8rem; color:var(--ink-muted);}

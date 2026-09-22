@@ -8,7 +8,7 @@
 <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'%3E%3Ctext y='.9em' font-size='90'%3E%F0%9F%94%92%3C/text%3E%3C/svg%3E">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,500;9..144,600;9..144,700&family=Manrope:wght@400;500;600;700;800&family=JetBrains+Mono:wght@400;500;700&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Jua&family=Gowun+Dodum&family=JetBrains+Mono:wght@400;500;700&display=swap" rel="stylesheet">
 <link rel="stylesheet" href="style.css">
 <style>
   .lock-screen{
@@ -195,21 +195,21 @@
       ctx.roundRect(60, 60, 140, 42, 21);
       ctx.fill();
       ctx.fillStyle = meta.base;
-      ctx.font = '700 20px "Fraunces", serif';
+      ctx.font = '400 22px "Jua", sans-serif';
       ctx.textAlign = 'center';
       ctx.textBaseline = 'middle';
       ctx.fillText(meta.label, 130, 82);
 
       ctx.textAlign = 'left';
       ctx.fillStyle = 'rgba(255,255,255,0.85)';
-      ctx.font = '600 22px "JetBrains Mono", monospace';
+      ctx.font = '400 24px "Jua", sans-serif';
       ctx.fillText('2026 KBS 가을 체육대회 · 초대장', 60, 150);
 
-      ctx.font = '600 62px "Fraunces", serif';
+      ctx.font = '400 64px "Jua", sans-serif';
       ctx.fillStyle = '#FFFFFF';
       ctx.fillText((name || '게스트') + ' 님', 60, 250);
 
-      ctx.font = '500 28px "Manrope", sans-serif';
+      ctx.font = '400 26px "Gowun Dodum", sans-serif';
       ctx.fillStyle = 'rgba(255,255,255,0.92)';
       ctx.fillText('톰과 제리의 불꽃 튀는 대결에 초대합니다', 60, 310);
 
@@ -221,16 +221,16 @@
       ctx.font = '500 24px "JetBrains Mono", monospace';
       lines.forEach((line, i) => ctx.fillText(line, 60, 410 + i * 42));
 
-      ctx.font = '600 22px "Manrope", sans-serif';
+      ctx.font = '400 24px "Jua", sans-serif';
       ctx.fillStyle = 'rgba(255,255,255,0.8)';
       ctx.fillText('10월 24일, 너도 함께할 거지?', 60, h - 66);
     }
 
     function loadFonts(){
       return Promise.all([
-        document.fonts.load('600 62px "Fraunces"'),
-        document.fonts.load('700 20px "Fraunces"'),
-        document.fonts.load('500 28px "Manrope"'),
+        document.fonts.load('400 64px "Jua"'),
+        document.fonts.load('400 24px "Jua"'),
+        document.fonts.load('400 26px "Gowun Dodum"'),
         document.fonts.load('500 24px "JetBrains Mono"'),
       ]).catch(()=>{});
     }

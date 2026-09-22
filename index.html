@@ -8,7 +8,7 @@
 <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'%3E%3Ctext y='.9em' font-size='90'%3E%F0%9F%A7%80%3C/text%3E%3C/svg%3E">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,500;9..144,600;9..144,700&family=Manrope:wght@400;500;600;700;800&family=JetBrains+Mono:wght@400;500;700&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Jua&family=Gowun+Dodum&family=JetBrains+Mono:wght@400;500;700&display=swap" rel="stylesheet">
 <link rel="stylesheet" href="style.css">
 </head>
 <body>
@@ -27,6 +27,19 @@
 </header>
 
 <main id="top">
+  <section class="section" id="highlight">
+    <div class="wrap">
+      <div class="section-head">
+        <p class="kicker">하이라이트 영상</p>
+        <h2>설레는 마음으로 미리 만나보기</h2>
+      </div>
+      <video class="highlight-video" controls preload="metadata" poster="assets/highlight-poster.jpg">
+        <source src="assets/highlight.mp4" type="video/mp4">
+        브라우저가 동영상 재생을 지원하지 않습니다.
+      </video>
+    </div>
+  </section>
+
   <section class="hero">
     <div class="wrap hero-inner">
       <p class="eyebrow">2026 · Autumn Sports Day</p>
@@ -66,24 +79,19 @@
         </div>
       </dl>
 
-      <p class="section-note">팀 유니폼을 입고 오시면 두 배 더 신나는 하루가 됩니다.</p>
-      <figure class="jersey-figure">
-        <img src="assets/team-jerseys.png" alt="톰팀 파란 유니폼과 제리팀 빨간 유니폼" loading="lazy">
-        <figcaption>왼쪽부터 톰팀 · 제리팀 유니폼 &mdash; 배정된 팀 컬러에 맞춰 입고 와주세요.</figcaption>
-      </figure>
-    </div>
-  </section>
-
-  <section class="section" id="highlight">
-    <div class="wrap">
-      <div class="section-head">
-        <p class="kicker">하이라이트 영상</p>
-        <h2>설레는 마음으로 미리 만나보기</h2>
+      <p class="section-note">유니폼 미리보기 &mdash; 배정된 팀 컬러에 맞춰 입고 와주세요.</p>
+      <div class="uniform-grid">
+        <figure class="uniform-card tom">
+          <span class="preview-tag">PREVIEW</span>
+          <img src="assets/tom-jersey.png" alt="톰팀 파란 유니폼, TOO FAST FOR YOU 문구" loading="lazy">
+          <figcaption>TEAM TOM</figcaption>
+        </figure>
+        <figure class="uniform-card jerry">
+          <span class="preview-tag">PREVIEW</span>
+          <img src="assets/jerry-jersey.png" alt="제리팀 빨간 유니폼, CATCH ME IF YOU CAN 문구" loading="lazy">
+          <figcaption>TEAM JERRY</figcaption>
+        </figure>
       </div>
-      <video class="highlight-video" controls preload="metadata" poster="assets/highlight-poster.jpg">
-        <source src="assets/highlight.mp4" type="video/mp4">
-        브라우저가 동영상 재생을 지원하지 않습니다.
-      </video>
     </div>
   </section>
 
