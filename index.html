@@ -5,46 +5,38 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>2026 KBS 가을 체육대회</title>
 <meta name="description" content="톰과 제리 테마의 2026 KBS 가을 체육대회 안내 페이지">
-<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'%3E%3Ctext y='.9em' font-size='90'%3E%F0%9F%A7%80%3C/text%3E%3C/svg%3E">
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'%3E%3Ctext y='.9em' font-size='90'%3E%F0%9F%8F%83%3C/text%3E%3C/svg%3E">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Jua&family=Gowun+Dodum&family=JetBrains+Mono:wght@400;500;700&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Sora:wght@600;700;800&family=Manrope:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500;700&display=swap" rel="stylesheet">
 <link rel="stylesheet" href="style.css">
 </head>
 <body>
 
 <header class="topbar">
-  <div class="wrap topbar-inner">
-    <a class="brand" href="#top">KBS 가을 체육대회</a>
-    <nav class="topnav">
-      <a href="#overview">개요</a>
-      <a href="#highlight">영상</a>
-      <a href="#teams">팀 소개</a>
-      <a href="#checklist">준비물</a>
-      <a href="#visit">오시는 길</a>
-    </nav>
+  <div class="progress-row" id="progressRow"></div>
+  <div class="topbar-inner">
+    <span class="brand">KBS 가을 체육대회</span>
+    <span class="slide-status" id="slideStatus">1 / 6</span>
   </div>
 </header>
 
-<div class="invitation-wrap">
-<span class="seal" aria-hidden="true">🧀</span>
-<main class="invitation" id="top">
-  <section class="section" id="highlight">
-    <div class="wrap">
-      <div class="section-head">
-        <p class="kicker">하이라이트 영상</p>
-        <h2>설레는 마음으로 미리 만나보기</h2>
-      </div>
+<div class="deck" id="deck">
+
+  <section class="slide" id="slide-highlight" data-title="하이라이트">
+    <div class="slide-inner slide-inner--video">
+      <p class="kicker">하이라이트 영상</p>
       <video class="highlight-video" controls preload="metadata" poster="assets/highlight-poster.jpg">
         <source src="assets/highlight.mp4" type="video/mp4">
         브라우저가 동영상 재생을 지원하지 않습니다.
       </video>
+      <p class="swipe-hint">오른쪽으로 넘겨서 계속 보기 →</p>
     </div>
   </section>
 
-  <section class="hero">
-    <div class="wrap hero-inner">
-      <p class="eyebrow">💌 초대합니다 · 2026 Autumn Sports Day</p>
+  <section class="slide" id="slide-hero" data-title="인트로">
+    <div class="slide-inner">
+      <p class="eyebrow">2026 · Autumn Sports Day</p>
       <h1>톰과 제리의<br>불꽃 튀는 대결</h1>
       <p class="sub">올해 남은 100일, 우리 추억 하나 더 만들자.<br>잡으려는 톰과 달아나는 제리, 승자는 누구일까요.</p>
 
@@ -56,19 +48,16 @@
       </div>
 
       <div class="cta-row">
-        <a href="#visit" class="btn btn-primary">지금 바로 신청하기</a>
-        <a href="#teams" class="btn btn-outline">내 팀 확인하기</a>
+        <button type="button" class="btn btn-primary" data-goto="slide-visit">지금 바로 신청하기</button>
+        <button type="button" class="btn btn-outline" data-goto="slide-teams">내 팀 확인하기</button>
       </div>
     </div>
-    <div class="hero-rule" aria-hidden="true"></div>
   </section>
 
-  <section class="section" id="overview">
-    <div class="wrap">
-      <div class="section-head">
-        <p class="kicker">대회 개요</p>
-        <h2>승부욕은 잠깐 꺼내고,<br>웃음은 마음껏 터뜨릴 시간</h2>
-      </div>
+  <section class="slide" id="slide-overview" data-title="대회 개요">
+    <div class="slide-inner">
+      <p class="kicker">대회 개요</p>
+      <h2>승부욕은 잠깐 꺼내고,<br>웃음은 마음껏 터뜨릴 시간</h2>
 
       <dl class="info-list">
         <div class="info-row">
@@ -90,19 +79,17 @@
         </figure>
         <figure class="uniform-card jerry">
           <span class="preview-tag">PREVIEW</span>
-          <img src="assets/jerry-jersey.png" alt="제리팀 빨간 유니폼, CATCH ME IF YOU CAN 문구" loading="lazy">
+          <img src="assets/jerry-jersey.png" alt="제리팀 주황 유니폼, CATCH ME IF YOU CAN 문구" loading="lazy">
           <figcaption>TEAM JERRY</figcaption>
         </figure>
       </div>
     </div>
   </section>
 
-  <section class="section" id="teams">
-    <div class="wrap">
-      <div class="section-head">
-        <p class="kicker">팀 소개</p>
-        <h2>톰팀 vs 제리팀</h2>
-      </div>
+  <section class="slide" id="slide-teams" data-title="팀 소개">
+    <div class="slide-inner">
+      <p class="kicker">팀 소개</p>
+      <h2>톰팀 vs 제리팀</h2>
 
       <div class="rivalry">
         <div class="rivalry-side tom">
@@ -122,12 +109,10 @@
     </div>
   </section>
 
-  <section class="section" id="checklist">
-    <div class="wrap">
-      <div class="section-head">
-        <p class="kicker">준비물 체크리스트</p>
-        <h2>당일 잊지 말고 챙겨오세요</h2>
-      </div>
+  <section class="slide" id="slide-checklist" data-title="준비물">
+    <div class="slide-inner">
+      <p class="kicker">준비물 체크리스트</p>
+      <h2>당일 잊지 말고 챙겨오세요</h2>
 
       <div class="checklist-cols">
         <div class="checklist-col">
@@ -172,12 +157,10 @@
     </div>
   </section>
 
-  <section class="section" id="visit">
-    <div class="wrap">
-      <div class="section-head">
-        <p class="kicker">오시는 길 &amp; 안내사항</p>
-        <h2>찾아오시는 길</h2>
-      </div>
+  <section class="slide" id="slide-visit" data-title="오시는 길">
+    <div class="slide-inner">
+      <p class="kicker">오시는 길 &amp; 안내사항</p>
+      <h2>찾아오시는 길</h2>
 
       <dl class="info-list">
         <div class="info-row">
@@ -200,15 +183,16 @@
           <p class="empty-note">불러오는 중&hellip;</p>
         </div>
       </div>
+
+      <p class="closing-line">10월 24일, 너도 함께할 거지?</p>
+      <p class="closing-copy">© 2026 KBS Autumn Sports Day. All rights reserved.</p>
     </div>
   </section>
-</main>
+
 </div>
 
-<footer class="stub">
-  <p class="foot-line">10월 24일, 너도 함께할 거지?</p>
-  <p class="foot-copy">© 2026 KBS Autumn Sports Day. All rights reserved.</p>
-</footer>
+<button type="button" class="nav-btn prev" id="prevBtn" aria-label="이전 화면">‹</button>
+<button type="button" class="nav-btn next" id="nextBtn" aria-label="다음 화면">›</button>
 
 <script src="main.js"></script>
 </body>
