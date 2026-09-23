@@ -93,29 +93,3 @@ document.querySelectorAll('.check-item').forEach((item) => {
     localStorage.setItem(CHECK_KEY, JSON.stringify(checkedState));
   });
 });
-
-// ---------- notices ----------
-function escapeHtml(s){
-  return String(s ?? '').replace(/[&<>"']/g, (c) => ({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
-}
-
-fetch('data/notices.json')
-  .then((res) => res.json())
-  .then((notices) => {
-    const list = document.getElementById('noticeList');
-    if (!Array.isArray(notices) || notices.length === 0) {
-      list.innerHTML = '<p class="empty-note">등록된 공지사항이 없습니다.</p>';
-      return;
-    }
-    const sorted = [...notices].sort((a, b) => (a.date < b.date ? 1 : -1));
-    list.innerHTML = sorted.map((n) => `
-      <div class="notice-card">
-        <div class="n-date">${escapeHtml(n.date || '')}</div>
-        <div class="n-title">${escapeHtml(n.title || '')}</div>
-        <div class="n-body">${escapeHtml(n.body || '')}</div>
-      </div>`).join('');
-  })
-  .catch(() => {
-    const list = document.getElementById('noticeList');
-    if (list) list.innerHTML = '<p class="empty-note">공지사항을 불러올 수 없습니다.</p>';
-  });
