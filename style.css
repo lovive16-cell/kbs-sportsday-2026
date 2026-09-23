@@ -135,14 +135,19 @@ h2{font-size:clamp(1.7rem,6.5vw,2.3rem); line-height:1.28; margin-bottom:24px;}
 h1{font-size:clamp(2.5rem, 10vw, 3.7rem); line-height:1.14; letter-spacing:-0.02em;}
 .sub{max-width:480px; margin:20px 0 0; color:var(--ink-muted); font-size:1.22rem;}
 
-.stat-row{margin:32px 0 0; display:flex; gap:14px; flex-wrap:wrap;}
+.info-dday-row{display:flex; align-items:stretch; gap:14px; margin-bottom:28px;}
+.info-dday-row .info-list{flex:1; margin-bottom:0; min-width:0;}
+.info-dday-row .info-row{grid-template-columns:82px 1fr;}
 .stat{
-  display:flex; flex-direction:column; gap:5px;
+  display:flex; align-items:center; justify-content:center; flex-shrink:0;
   background:var(--surface); border:1px solid var(--line); border-radius:14px; padding:16px 22px;
   box-shadow:var(--shadow);
 }
-.stat-num{font-size:2.6rem; font-weight:700; line-height:1; color:var(--tom);}
-.stat-label{font-size:0.95rem; color:var(--ink-muted);}
+.stat-num{font-size:2.6rem; font-weight:700; line-height:1; color:var(--tom); white-space:nowrap;}
+@media (max-width:420px){
+  .info-dday-row{flex-direction:column;}
+  .stat{padding:12px 22px;}
+}
 
 .cta-row{margin-top:28px; display:flex; gap:12px; flex-wrap:wrap;}
 .btn{
