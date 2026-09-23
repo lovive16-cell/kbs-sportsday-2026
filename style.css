@@ -106,7 +106,11 @@ a{color:inherit;}
   margin:0 auto;
   padding:20px 30px 48px;
 }
-.slide-inner--video{max-width:600px; text-align:center;}
+.slide-inner--video{text-align:center;}
+
+.slide-divider{
+  border:0; border-top:1px solid var(--line); margin:36px 0;
+}
 
 .kicker{
   font-family:'JetBrains Mono',monospace; font-size:0.9rem; font-weight:500;

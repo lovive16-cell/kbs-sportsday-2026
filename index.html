@@ -17,24 +17,24 @@
   <div class="progress-row" id="progressRow"></div>
   <div class="topbar-inner">
     <span class="brand">KBS 가을 체육대회</span>
-    <span class="slide-status" id="slideStatus">1 / 6</span>
+    <span class="slide-status" id="slideStatus">1 / 3</span>
   </div>
 </header>
 
 <div class="deck" id="deck">
 
-  <section class="slide" id="slide-highlight" data-title="하이라이트">
-    <div class="slide-inner slide-inner--video">
-      <video class="highlight-video" controls preload="metadata" poster="assets/highlight-poster.jpg">
-        <source src="assets/highlight.mp4" type="video/mp4">
-        브라우저가 동영상 재생을 지원하지 않습니다.
-      </video>
-      <p class="swipe-hint">오른쪽으로 넘겨서 계속 보기 →</p>
-    </div>
-  </section>
-
-  <section class="slide" id="slide-hero" data-title="인트로">
+  <section class="slide" id="slide-intro" data-title="인트로">
     <div class="slide-inner">
+      <div class="slide-inner--video">
+        <video class="highlight-video" controls preload="metadata" poster="assets/highlight-poster.jpg">
+          <source src="assets/highlight.mp4" type="video/mp4">
+          브라우저가 동영상 재생을 지원하지 않습니다.
+        </video>
+        <p class="swipe-hint">오른쪽으로 넘겨서 계속 보기 →</p>
+      </div>
+
+      <hr class="slide-divider">
+
       <p class="eyebrow">2026 · Autumn Sports Day</p>
       <h1>톰과 제리의<br>불꽃 튀는 대결</h1>
       <p class="sub">올해 남은 100일, 우리 추억 하나 더 만들자.<br>잡으려는 톰과 달아나는 제리, 승자는 누구일까요.</p>
@@ -48,12 +48,12 @@
 
       <div class="cta-row">
         <a class="btn btn-primary" href="https://docs.google.com/forms/d/e/1FAIpQLSeyZ98CZttwi81H_oF4EjaJI6hYm3Xe8yElcPVy36ha8CMBtw/viewform?usp=sharing&ouid=106015902044446836961" target="_blank" rel="noopener">지금 바로 신청하기</a>
-        <button type="button" class="btn btn-outline" data-goto="slide-teams">내 팀 확인하기</button>
+        <button type="button" class="btn btn-outline" data-goto="slide-info">내 팀 확인하기</button>
       </div>
     </div>
   </section>
 
-  <section class="slide" id="slide-overview" data-title="대회 개요">
+  <section class="slide" id="slide-info" data-title="대회 정보">
     <div class="slide-inner">
       <p class="kicker">대회 개요</p>
       <h2>승부욕은 잠깐 꺼내고,<br>웃음은 마음껏 터뜨릴 시간</h2>
@@ -68,11 +68,9 @@
           <dd><a class="map-link" href="https://map.naver.com/p/entry/place/11593893?placePath=%2Fhome" target="_blank" rel="noopener">경기상고 백악관 (체육관)</a></dd>
         </div>
       </dl>
-    </div>
-  </section>
 
-  <section class="slide" id="slide-teams" data-title="팀 소개">
-    <div class="slide-inner">
+      <hr class="slide-divider">
+
       <p class="kicker">팀 소개</p>
       <h2>톰팀 vs 제리팀</h2>
 
@@ -108,7 +106,7 @@
     </div>
   </section>
 
-  <section class="slide" id="slide-checklist" data-title="준비물">
+  <section class="slide" id="slide-details" data-title="준비물·오시는 길">
     <div class="slide-inner">
       <p class="kicker">준비물 체크리스트</p>
       <h2>당일 잊지 말고 챙겨오세요</h2>
@@ -149,11 +147,9 @@
           </ul>
         </div>
       </div>
-    </div>
-  </section>
 
-  <section class="slide" id="slide-visit" data-title="오시는 길">
-    <div class="slide-inner">
+      <hr class="slide-divider">
+
       <p class="kicker">오시는 길 &amp; 안내사항</p>
       <h2>찾아오시는 길</h2>
 
